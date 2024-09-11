@@ -1,0 +1,33 @@
+[tool.poetry]
+authors = ["ppipada <ppipada@gmail.com>"]
+description = "A LLM agent to detect vulnerabilities in code"
+# include = [
+#   {path = "evaldata", format = ["sdist", "wheel"]},
+# ]
+license = "MIT"
+name = "agent-repoguardian"
+packages = [
+  {include = "src", to = "agent_repoguardian", format = ["sdist", "wheel"]},
+]
+readme = "README.md"
+repository = "https://github.com/flexigpt/agent-repoguardian"
+version = "0.1.0"
+
+[tool.poetry.dependencies]
+go-vulnfixes-db = {path = "../go-vulnfixes-db"}
+llama-index = "^0.11.2"
+llama-index-llms-anthropic = "^0.2.1"
+llama-index-llms-openai = "^0.2.0"
+llama-index-program-openai = "^0.2.0"
+openai = "^1.42.0"
+pydantic = "^2.8.2"
+python = "^3.12"
+python-dotenv = "^1.0.1"
+tiktoken = "^0.7.0"
+
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core"]
+
+[tool.poetry.plugins."poetry.application.plugin"]
+export = "poetry_plugin_export.plugins:ExportApplicationPlugin"

@@ -1,0 +1,82 @@
+[
+  {
+    "id": "CVE-2024-25124",
+    "scan_type": "before",
+    "vulnerability_labels": [
+      {
+        "line_nos": [
+          15,
+          22,
+          27,
+          33,
+          37,
+          38,
+          39,
+          42,
+          43,
+          46,
+          47,
+          54,
+          55,
+          59,
+          60,
+          63,
+          64,
+          81,
+          82,
+          83,
+          91,
+          92,
+          96,
+          97,
+          102,
+          104,
+          105,
+          116,
+          120,
+          121,
+          122
+        ],
+        "vulnerability_category_labels": [
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "Input Validation",
+          "Input Validation",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "Input Validation",
+          "Input Validation",
+          "Input Validation",
+          "Input Validation",
+          "Input Validation",
+          "Input Validation",
+          "Input Validation",
+          "Input Validation",
+          "Input Validation",
+          "Input Validation",
+          "Input Validation",
+          "Input Validation",
+          "Input Validation",
+          "Input Validation"
+        ]
+      }
+    ],
+    "scan_responses": [
+      {
+        "vuln": true,
+        "description": ""
+      }
+    ]
+  }
+]

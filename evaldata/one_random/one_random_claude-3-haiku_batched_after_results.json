@@ -1,0 +1,12 @@
+[
+  {
+    "id": "CVE-2024-25124",
+    "scan_type": "after",
+    "scan_responses": [
+      {
+        "vuln": true,
+        "description": "The provided code contains a potential security vulnerability related to the CORS (Cross-Origin Resource Sharing) configuration. Specifically, the code allows the use of a wildcard (\"*\") in the `AllowOrigins` configuration, which can be a security risk when `AllowCredentials` is set to `true`.\n\nThe vulnerability arises from the following code:\n\n```go\n// Validate CORS credentials configuration\nif cfg.AllowCredentials && cfg.AllowOrigins == \"*\" {\n    panic(\"[CORS] Insecure setup, 'AllowCredentials' is set to true, and 'AllowOrigins' is set to a wildcard.\")\n}\n```\n\nThis code correctly identifies the security risk and attempts to prevent it by panicking if the configuration is set in an insecure way. However, the vulnerability still exists in the code, as the configuration can still be set in an insecure manner, and the code does not provide a way to safely handle this scenario.\n\nTo mitigate this vulnerability, the code should either:\n1. Disallow the use of a wildcard (\"*\") in the `AllowOrigins` configuration when `AllowCredentials` is set to `true`.\n2. Provide a more robust validation and handling mechanism to ensure that the CORS configuration is always set in a secure way."
+      }
+    ]
+  }
+]

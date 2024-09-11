@@ -1,0 +1,36 @@
+[
+  {
+    "id": "CVE-2024-25124",
+    "scan_type": "before",
+    "vulnerability_labels": [
+      {
+        "line_nos": [
+          15,
+          22,
+          27,
+          38,
+          46,
+          54,
+          59,
+          64
+        ],
+        "vulnerability_category_labels": [
+          "SecurityMisconfiguration",
+          "SecurityMisconfiguration",
+          "SecurityMisconfiguration",
+          "SecurityMisconfiguration",
+          "SecurityMisconfiguration",
+          "SecurityMisconfiguration",
+          "SecurityMisconfiguration",
+          "SecurityMisconfiguration"
+        ]
+      }
+    ],
+    "scan_responses": [
+      {
+        "vuln": true,
+        "description": "The code contains a potential security misconfiguration vulnerability related to the handling of CORS (Cross-Origin Resource Sharing) settings. Specifically, the 'AllowOrigins' setting defaults to '*', which allows any origin to access the resources. This can lead to security issues as it permits any website to interact with the server, potentially exposing sensitive data. Additionally, the 'AllowCredentials' setting, when set to true, allows credentials to be included in requests from any origin, which can further exacerbate the risk if combined with a wildcard origin. To mitigate this, it is recommended to specify a more restrictive set of allowed origins and carefully consider the implications of allowing credentials."
+      }
+    ]
+  }
+]

@@ -1,0 +1,165 @@
+[
+  {
+    "id": "CVE-2024-25124",
+    "scan_type": "after",
+    "scan_responses": [
+      {
+        "code_block": {
+          "Primary Functional Area": "API and Functionality Management",
+          "Sub Functional Area": "Initialization and Cleanup",
+          "Example issues to look for": [
+            "Initialization of a Resource with an Insecure Default",
+            "Non-exit on Failed Initialization"
+          ],
+          "Code lines": [
+            "// AllowOriginsFunc defines a function that will set the 'access-control-allow-origin'",
+            "// AllowOrigin defines a comma separated list of origins that may access the resource.",
+            "// AllowCredentials indicates whether or not the response to the request",
+            "log.Warn(\"[CORS] Both 'AllowOrigins' and 'AllowOriginsFunc' have been defined.\")",
+            "}"
+          ]
+        },
+        "scan_response": {
+          "vuln_score": 4,
+          "exploitable_vuln": false,
+          "description": "The code snippet indicates a potential issue with CORS (Cross-Origin Resource Sharing) configuration. The warning log suggests that both 'AllowOrigins' and 'AllowOriginsFunc' are defined, which could lead to conflicting CORS policies. While this does not directly expose a vulnerability, it can lead to misconfigurations that may allow unintended origins to access the resource. To mitigate this, ensure that only one method of defining allowed origins is used, and validate the origins against a whitelist."
+        }
+      },
+      {
+        "code_block": {
+          "Primary Functional Area": "API and Functionality Management",
+          "Sub Functional Area": "Data / Function Handling",
+          "Example issues to look for": [
+            "Invokable Control Element with Excessive File or Data Access Operations",
+            "Reliance on Runtime Component in Generated Code",
+            "Use of Inherently Dangerous Function",
+            "Symbolic Name not Mapping to Correct Object",
+            "Use of NullPointerException Catch to Detect NULL Pointer Dereference",
+            "Deployment of Wrong Handler",
+            "Missing Handler",
+            "Use of Function with Inconsistent Implementations",
+            "Undefined Behavior for Input to API",
+            "Use of Obsolete Function",
+            "Exposed Dangerous Method or Function",
+            "Improper Control of Generation of Code ('Code Injection')"
+          ],
+          "Code lines": [
+            "originHeader := c.Get(fiber.HeaderOrigin)",
+            "allowOrigin := \"\"",
+            "// Check allowed origins",
+            "for _, origin := range allowOrigins {",
+            "if origin == \"*\" {",
+            "allowOrigin = \"*\"",
+            "allowOrigin = originHeader",
+            "break",
+            "}",
+            "if cfg.AllowOriginsFunc(originHeader) {",
+            "allowOrigin = originHeader",
+            "}",
+            "c.Set(fiber.HeaderAccessControlAllowMethods, allowMethods)",
+            "if cfg.AllowCredentials {",
+            "// When AllowCredentials is true, set the Access-Control-Allow-Origin to the specific origin instead of '*'",
+            "if allowOrigin != \"*\" && allowOrigin != \"\" {",
+            "c.Set(fiber.HeaderAccessControlAllowOrigin, allowOrigin)",
+            "c.Set(fiber.HeaderAccessControlAllowCredentials, \"true\")",
+            "} else if allowOrigin == \"*\" {",
+            "log.Warn(\"[CORS] 'AllowCredentials' is true, but 'AllowOrigins' cannot be set to '*'.\")",
+            "}",
+            "}"
+          ]
+        },
+        "scan_response": {
+          "vuln_score": 6,
+          "exploitable_vuln": true,
+          "description": "The code allows for dynamic setting of the 'Access-Control-Allow-Origin' header based on the 'originHeader' value. If 'originHeader' is not properly validated against a whitelist of allowed origins, it could lead to Cross-Origin Resource Sharing (CORS) vulnerabilities, allowing unauthorized domains to access sensitive resources. The use of '*' in conjunction with 'AllowCredentials' is also problematic, as it can expose the application to CSRF attacks. To mitigate this, ensure that 'originHeader' is validated against a strict list of allowed origins and avoid using '*' when 'AllowCredentials' is true."
+        }
+      },
+      {
+        "code_block": {
+          "Primary Functional Area": "API and Functionality Management",
+          "Sub Functional Area": "Type Handling",
+          "Example issues to look for": [
+            "Off-by-one Error",
+            "Improper Handling of Unexpected Data Type",
+            "Insufficient Type Distinction",
+            "Access of Resource Using Incompatible Type ('Type Confusion')",
+            "Improper Control of Dynamically-Identified Variables"
+          ],
+          "Code lines": [
+            "import (",
+            "didx := strings.Index(domain, \":\")",
+            "// Directly compare the domain and pattern for an exact match.",
+            "func normalizeDomain(input string) string {",
+            "// It returns a boolean indicating whether the origin is valid"
+          ]
+        },
+        "scan_response": {
+          "vuln_score": 3,
+          "exploitable_vuln": false,
+          "description": "The code snippet shows a potential issue with type handling, specifically in the line 'didx := strings.Index(domain, \":\")'. If 'domain' is not a string or is nil, this could lead to a runtime panic. However, this is not directly exploitable as it depends on the input provided to the function. To mitigate this, ensure that 'domain' is validated before being passed to the function."
+        }
+      },
+      {
+        "code_block": {
+          "Primary Functional Area": "Data Management and Integrity",
+          "Sub Functional Area": "Data Validation",
+          "Example issues to look for": [
+            "Misinterpretation of Input",
+            "Improper Use of Validation Framework",
+            "Improper Validation of Unsafe Equivalence in Input",
+            "Incorrect Parsing of Numbers with Different Radices",
+            "Improper Handling of Missing Special Element",
+            "Improper Handling of Additional Special Element",
+            "Improper Handling of Inconsistent Special Elements",
+            "Improper Handling of Case Sensitivity",
+            "Incorrect Behavior Order: Early Validation",
+            "Improper Handling of Values",
+            "Improper Handling of Parameters",
+            "Unchecked Input for Loop Condition"
+          ],
+          "Code lines": [
+            "panic(\"[CORS] Insecure setup, 'AllowCredentials' is set to true, and 'AllowOrigins' is set to a wildcard.\")",
+            "}",
+            "if cfg.AllowOriginsFunc == nil && cfg.AllowOrigins != \"\" && cfg.AllowOrigins != \"*\" {",
+            "for _, origin := range strings.Split(cfg.AllowOrigins, \",\") {",
+            "isValid, normalizedOrigin := normalizeOrigin(origin)",
+            "if isValid {",
+            "validatedOrigins = append(validatedOrigins, normalizedOrigin)",
+            "} else {",
+            "panic(\"[CORS] Invalid origin provided in configuration\")",
+            "}",
+            "}",
+            "parsedOrigin, err := url.Parse(origin)",
+            "if err != nil {",
+            "return false, \"\"",
+            "// is checked, but a trailing \"/\" (indicative of the root) is allowed for the path and will be normalized",
+            "}"
+          ]
+        },
+        "scan_response": {
+          "vuln_score": 7,
+          "exploitable_vuln": true,
+          "description": "The code contains a CORS configuration issue where 'AllowCredentials' is set to true while 'AllowOrigins' is set to a wildcard ('*'). This combination can lead to security vulnerabilities, as it allows any origin to send credentials, potentially exposing sensitive user data. The panic statement indicates that this is a critical issue that should be addressed. To mitigate this, 'AllowOrigins' should be set to specific trusted origins instead of a wildcard."
+        }
+      },
+      {
+        "code_block": {
+          "Primary Functional Area": "Data Management and Integrity",
+          "Sub Functional Area": "String Handling",
+          "Example issues to look for": [
+            "Improper Null Termination"
+          ],
+          "Code lines": [
+            "allowOrigins := strings.Split(strings.ReplaceAll(cfg.AllowOrigins, \" \", \"\"), \",\")",
+            "return c.Next()"
+          ]
+        },
+        "scan_response": {
+          "vuln_score": 3,
+          "exploitable_vuln": false,
+          "description": "The code line 'allowOrigins := strings.Split(strings.ReplaceAll(cfg.AllowOrigins, \" \", \"\"), \",\")' processes a configuration string to split allowed origins. However, if 'cfg.AllowOrigins' is improperly formatted or contains unexpected characters, it could lead to issues in string handling. While this does not present a direct exploitable vulnerability, it could lead to improper handling of allowed origins, potentially allowing unintended origins if not validated further. A score of 3 is assigned as it indicates a low risk, but it is advisable to validate the format of 'cfg.AllowOrigins' before processing."
+        }
+      }
+    ]
+  }
+]

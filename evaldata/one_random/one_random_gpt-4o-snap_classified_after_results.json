@@ -1,0 +1,280 @@
+[
+  {
+    "id": "CVE-2024-25124",
+    "scan_type": "after",
+    "scan_responses": [
+      {
+        "code_block": {
+          "Primary Functional Area": "API and Functionality Management",
+          "Sub Functional Area": "Initialization and Cleanup",
+          "Example issues to look for": [
+            "Initialization of a Resource with an Insecure Default",
+            "Non-exit on Failed Initialization"
+          ],
+          "Code lines": [
+            "// AllowOriginsFunc defines a function that will set the 'access-control-allow-origin'"
+          ]
+        },
+        "scan_response": {
+          "vuln_score": 0,
+          "exploitable_vuln": false,
+          "description": "The provided code line is a comment describing a function related to setting 'access-control-allow-origin'. There is no actual code implementation provided to analyze for vulnerabilities. Therefore, no security issues can be identified or scored based on this comment alone."
+        }
+      },
+      {
+        "code_block": {
+          "Primary Functional Area": "API and Functionality Management",
+          "Sub Functional Area": "Data / Function Handling",
+          "Example issues to look for": [
+            "Invokable Control Element with Excessive File or Data Access Operations",
+            "Reliance on Runtime Component in Generated Code",
+            "Use of Inherently Dangerous Function",
+            "Symbolic Name not Mapping to Correct Object",
+            "Use of NullPointerException Catch to Detect NULL Pointer Dereference",
+            "Deployment of Wrong Handler",
+            "Missing Handler",
+            "Use of Function with Inconsistent Implementations",
+            "Undefined Behavior for Input to API",
+            "Use of Obsolete Function",
+            "Exposed Dangerous Method or Function",
+            "Improper Control of Generation of Code ('Code Injection')"
+          ],
+          "Code lines": [
+            "// AllowOrigin defines a comma separated list of origins that may access the resource.",
+            "// AllowCredentials indicates whether or not the response to the request",
+            "log.Warn(\"[CORS] Both 'AllowOrigins' and 'AllowOriginsFunc' have been defined.\")",
+            "c.Set(fiber.HeaderAccessControlAllowMethods, allowMethods)",
+            "if cfg.AllowCredentials {"
+          ]
+        },
+        "scan_response": {
+          "vuln_score": 3,
+          "exploitable_vuln": false,
+          "description": "The code snippet provided includes a warning log message indicating that both 'AllowOrigins' and 'AllowOriginsFunc' have been defined. This could potentially lead to a misconfiguration in CORS settings, but it is not directly exploitable as a security vulnerability. The risk is low as it primarily concerns configuration management rather than a direct security flaw. To mitigate, ensure that only one of 'AllowOrigins' or 'AllowOriginsFunc' is used to avoid potential conflicts in CORS policy."
+        }
+      },
+      {
+        "code_block": {
+          "Primary Functional Area": "API and Functionality Management",
+          "Sub Functional Area": "Expression Issues",
+          "Example issues to look for": [
+            "Processor Optimization Removal or Modification of Security-critical Code",
+            "Excessive Use of Self-Modifying Code",
+            "Missing Default Case in Multiple Condition Expression",
+            "Use of Incorrect Operator",
+            "Incorrect Block Delimitation",
+            "Omitted Break Statement in Switch",
+            "Reachable Assertion",
+            "Executable Regular Expression Error",
+            "Permissive Regular Expression",
+            "Compiler Optimization Removal or Modification of Security-critical Code",
+            "Operator Precedence Logic Error",
+            "Loop with Unreachable Exit Condition ('Infinite Loop')"
+          ],
+          "Code lines": [
+            "}"
+          ]
+        },
+        "scan_response": {
+          "vuln_score": 0,
+          "exploitable_vuln": false,
+          "description": "The provided code block contains only a closing brace '}', which does not provide any context or functionality to analyze. There are no observable security vulnerabilities or issues in this single line of code. Without additional context or code, it is impossible to determine any potential risks or concerns. Therefore, no vulnerability score is applicable, and there is no exploitable vulnerability present."
+        }
+      },
+      {
+        "code_block": {
+          "Primary Functional Area": "Security and Access Control",
+          "Sub Functional Area": "Configuration Management",
+          "Example issues to look for": [
+            "External Control of System or Configuration Setting"
+          ],
+          "Code lines": [
+            "}",
+            "panic(\"[CORS] Insecure setup, 'AllowCredentials' is set to true, and 'AllowOrigins' is set to a wildcard.\")",
+            "}",
+            "if origin == \"*\" {",
+            "allowOrigin = \"*\"",
+            "break",
+            "}",
+            "if validateDomain(originHeader, origin) {",
+            "allowOrigin = originHeader",
+            "break",
+            "}",
+            "}",
+            "// handling the value in 'AllowOrigins' does",
+            "if cfg.AllowOriginsFunc(originHeader) {",
+            "allowOrigin = originHeader",
+            "}",
+            "}",
+            "c.Set(fiber.HeaderAccessControlAllowOrigin, allowOrigin)",
+            "// When AllowCredentials is true, set the Access-Control-Allow-Origin to the specific origin instead of '*'",
+            "if allowOrigin != \"*\" && allowOrigin != \"\" {",
+            "c.Set(fiber.HeaderAccessControlAllowOrigin, allowOrigin)",
+            "c.Set(fiber.HeaderAccessControlAllowCredentials, \"true\")",
+            "} else if allowOrigin == \"*\" {",
+            "log.Warn(\"[CORS] 'AllowCredentials' is true, but 'AllowOrigins' cannot be set to '*'.\")",
+            "}",
+            "} else {",
+            "// For non-credential requests, it's safe to set to '*' or specific origins",
+            "c.Set(fiber.HeaderAccessControlAllowOrigin, allowOrigin)",
+            "}",
+            "// Set Allow-Headers if not empty"
+          ]
+        },
+        "scan_response": {
+          "vuln_score": 8,
+          "exploitable_vuln": true,
+          "description": "The code contains a critical security vulnerability related to Cross-Origin Resource Sharing (CORS) configuration. Specifically, the code sets 'AllowCredentials' to true while allowing 'AllowOrigins' to be a wildcard ('*'). This configuration is insecure because it permits any origin to send requests with credentials, potentially exposing sensitive data to unauthorized origins. The issue is explicitly observed in the line: `panic(\"[CORS] Insecure setup, 'AllowCredentials' is set to true, and 'AllowOrigins' is set to a wildcard.\")`. To mitigate this risk, ensure that 'AllowOrigins' is set to specific, trusted domains when 'AllowCredentials' is true, preventing unauthorized access to resources."
+        }
+      },
+      {
+        "code_block": {
+          "Primary Functional Area": "Data Management and Integrity",
+          "Sub Functional Area": "Data Validation",
+          "Example issues to look for": [
+            "Misinterpretation of Input",
+            "Improper Use of Validation Framework",
+            "Improper Validation of Unsafe Equivalence in Input",
+            "Incorrect Parsing of Numbers with Different Radices",
+            "Improper Handling of Missing Special Element",
+            "Improper Handling of Additional Special Element",
+            "Improper Handling of Inconsistent Special Elements",
+            "Improper Handling of Case Sensitivity",
+            "Incorrect Behavior Order: Early Validation",
+            "Improper Handling of Values",
+            "Improper Handling of Parameters",
+            "Unchecked Input for Loop Condition"
+          ],
+          "Code lines": [
+            "validatedOrigins := []string{}",
+            "for _, origin := range strings.Split(cfg.AllowOrigins, \",\") {",
+            "isValid, normalizedOrigin := normalizeOrigin(origin)",
+            "if isValid {",
+            "validatedOrigins = append(validatedOrigins, normalizedOrigin)",
+            "} else {",
+            "log.Warnf(\"[CORS] Invalid origin format in configuration: %s\", origin)",
+            "panic(\"[CORS] Invalid origin provided in configuration\")",
+            "}",
+            "}",
+            "cfg.AllowOrigins = strings.Join(validatedOrigins, \",\")",
+            "}",
+            "didx := strings.Index(domain, \":\")",
+            "pidx := strings.Index(pattern, \":\")",
+            "return didx != -1 && pidx != -1 && domain[:didx] == pattern[:pidx]",
+            "}",
+            "func validateDomain(domain, pattern string) bool {",
+            "// Directly compare the domain and pattern for an exact match.",
+            "if domain == pattern {",
+            "return true",
+            "}",
+            "// Normalize domain and pattern to exclude schemes and ports for matching purposes",
+            "normalizedDomain := normalizeDomain(domain)",
+            "normalizedPattern := normalizeDomain(pattern)",
+            "// Handling the case where pattern is a wildcard subdomain pattern.",
+            "if strings.HasPrefix(normalizedPattern, \"*.\") {",
+            "// Trim leading \"*.\" from pattern for comparison.",
+            "trimmedPattern := normalizedPattern[2:]",
+            "// Check if the domain ends with the trimmed pattern.",
+            "if strings.HasSuffix(normalizedDomain, trimmedPattern) {",
+            "// Ensure that the domain is not exactly the base domain.",
+            "if normalizedDomain != trimmedPattern {",
+            "// Special handling to prevent \"example.com\" matching \"*.example.com\".",
+            "if strings.TrimSuffix(normalizedDomain, trimmedPattern) != \"\" {",
+            "return true",
+            "}",
+            "}",
+            "}",
+            "}",
+            "return false",
+            "}",
+            "// and normalizes it by removing any path or trailing slash.",
+            "// It returns a boolean indicating whether the origin is valid",
+            "// and the normalized origin.",
+            "func normalizeOrigin(origin string) (bool, string) {",
+            "parsedOrigin, err := url.Parse(origin)",
+            "if err != nil {",
+            "return false, \"\"",
+            "}",
+            "// Validate the scheme is either http or https",
+            "if parsedOrigin.Scheme != \"http\" && parsedOrigin.Scheme != \"https\" {",
+            "return false, \"\"",
+            "}",
+            "// Validate there is a host present. The presence of a path, query, or fragment components",
+            "// is checked, but a trailing \"/\" (indicative of the root) is allowed for the path and will be normalized",
+            "if parsedOrigin.Host == \"\" || (parsedOrigin.Path != \"\" && parsedOrigin.Path != \"/\") || parsedOrigin.RawQuery != \"\" || parsedOrigin.Fragment != \"\" {",
+            "return false, \"\"",
+            "}",
+            "// Normalize the origin by constructing it from the scheme and host.",
+            "// The path or trailing slash is not included in the normalized origin.",
+            "return true, strings.ToLower(parsedOrigin.Scheme) + \"://\" + strings.ToLower(parsedOrigin.Host)",
+            "}"
+          ]
+        },
+        "scan_response": {
+          "vuln_score": 7,
+          "exploitable_vuln": true,
+          "description": "The code block responsible for normalizing and validating origins in the CORS configuration has a potential vulnerability. Specifically, the function `normalizeOrigin` does not account for internationalized domain names (IDNs) which can lead to security issues such as domain spoofing. The function assumes that the domain is in ASCII format and does not convert IDNs to their ASCII-compatible encoding (ACE) using Punycode. This oversight can allow malicious actors to bypass origin validation by using IDNs that visually resemble trusted domains. To mitigate this risk, the code should be updated to handle IDNs properly by converting them to Punycode before validation."
+        }
+      },
+      {
+        "code_block": {
+          "Primary Functional Area": "Data Management and Integrity",
+          "Sub Functional Area": "String Handling",
+          "Example issues to look for": [
+            "Improper Null Termination"
+          ],
+          "Code lines": [
+            "return c.Next()"
+          ]
+        },
+        "scan_response": {
+          "vuln_score": 1,
+          "exploitable_vuln": false,
+          "description": "The code line 'return c.Next()' does not present any explicit security vulnerability related to data management and integrity or string handling. There is no indication of improper null termination or any other string handling issue. The function call appears to be a control flow operation, likely part of a middleware or similar pattern, and does not directly manipulate strings or data in a way that would introduce a security risk. Therefore, it is not considered an exploitable vulnerability."
+        }
+      },
+      {
+        "code_block": {
+          "Primary Functional Area": "Data Management and Integrity",
+          "Sub Functional Area": "Data Processing",
+          "Example issues to look for": [
+            "Data Element Aggregating an Excessively Large Number of Non-Primitive Elements",
+            "Excessive Data Query Operations in a Large Data Table",
+            "Missing Serialization Control Element",
+            "Excessive Execution of Sequential Searches of Data Resource",
+            "Data Resource Access without Use of Connection Pooling",
+            "Non-SQL Invokable Control Element with Excessive Number of Data Resource Accesses",
+            "Excessive Index Range Scan for a Data Resource",
+            "Reliance on Machine-Dependent Data Representation",
+            "Missing XML Validation",
+            "Improper Handling of Length Parameter Inconsistency",
+            "Collapse of Data into Unsafe Value",
+            "Improper Handling of Structural Elements",
+            "Acceptance of Extraneous Untrusted Data With Trusted Data",
+            "Improper Handling of Highly Compressed Data (Data Amplification)",
+            "Deserialization of Untrusted Data",
+            "Dangling Database Cursor ('Cursor Injection')"
+          ],
+          "Code lines": [
+            "allowOrigin := \"\"",
+            "// Check allowed origins",
+            "func normalizeDomain(input string) string {",
+            "// Remove scheme",
+            "input = strings.TrimPrefix(strings.TrimPrefix(input, \"http://\"), \"https://\")",
+            "// Find and remove port, if present",
+            "if portIndex := strings.Index(input, \":\"); portIndex != -1 {",
+            "input = input[:portIndex]",
+            "}",
+            "return input",
+            "}"
+          ]
+        },
+        "scan_response": {
+          "vuln_score": 3,
+          "exploitable_vuln": false,
+          "description": "The code provided is responsible for normalizing domain names by removing the scheme (http or https) and any port information. While this function is not directly vulnerable, it could potentially lead to security issues if used improperly in a broader context. For example, if this function is used to validate or filter allowed origins without further checks, it might allow unintended domains if the input is not properly sanitized or validated elsewhere. However, based on the provided code alone, there is no direct exploitable vulnerability. The risk is low, and it is more of a code hardening suggestion to ensure that domain normalization is part of a comprehensive validation process."
+        }
+      }
+    ]
+  }
+]

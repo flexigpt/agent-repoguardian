@@ -1,0 +1,224 @@
+[
+  {
+    "id": "CVE-2024-25124",
+    "scan_type": "before",
+    "scan_responses": [
+      {
+        "code_block": {
+          "categorized_lines": [
+            {
+              "Primary Functional Area": "API and Functionality Management",
+              "Sub Functional Area": "Initialization and Cleanup",
+              "Example issues to look for": [
+                "Initialization of a Resource with an Insecure Default",
+                "Non-exit on Failed Initialization"
+              ],
+              "Code lines": [
+                "// AllowOriginsFunc defines a function that will set the 'access-control-allow-origin'",
+                "// AllowOrigin defines a list of origins that may access the resource.",
+                "// AllowCredentials indicates whether or not the response to the request",
+                "log.Warn(\"[CORS] Both 'AllowOrigins' and 'AllowOriginsFunc' have been defined.\")",
+                "import (",
+                "\"strings\"",
+                ")"
+              ]
+            },
+            {
+              "Primary Functional Area": "API and Functionality Management",
+              "Sub Functional Area": "Expression Issues",
+              "Example issues to look for": [
+                "Processor Optimization Removal or Modification of Security-critical Code",
+                "Excessive Use of Self-Modifying Code",
+                "Missing Default Case in Multiple Condition Expression",
+                "Use of Incorrect Operator",
+                "Incorrect Block Delimitation",
+                "Omitted Break Statement in Switch",
+                "Reachable Assertion",
+                "Executable Regular Expression Error",
+                "Permissive Regular Expression",
+                "Compiler Optimization Removal or Modification of Security-critical Code",
+                "Operator Precedence Logic Error",
+                "Loop with Unreachable Exit Condition ('Infinite Loop')"
+              ],
+              "Code lines": [
+                "}"
+              ]
+            },
+            {
+              "Primary Functional Area": "API and Functionality Management",
+              "Sub Functional Area": "Data / Function Handling",
+              "Example issues to look for": [
+                "Invokable Control Element with Excessive File or Data Access Operations",
+                "Reliance on Runtime Component in Generated Code",
+                "Use of Inherently Dangerous Function",
+                "Symbolic Name not Mapping to Correct Object",
+                "Use of NullPointerException Catch to Detect NULL Pointer Dereference",
+                "Deployment of Wrong Handler",
+                "Missing Handler",
+                "Use of Function with Inconsistent Implementations",
+                "Undefined Behavior for Input to API",
+                "Use of Obsolete Function",
+                "Exposed Dangerous Method or Function",
+                "Improper Control of Generation of Code ('Code Injection')"
+              ],
+              "Code lines": [
+                "}",
+                "c.Set(fiber.HeaderAccessControlAllowMethods, allowMethods)",
+                "// Set Allow-Credentials if set to true"
+              ]
+            },
+            {
+              "Primary Functional Area": "Data Management and Integrity",
+              "Sub Functional Area": "String Handling",
+              "Example issues to look for": [
+                "Improper Null Termination"
+              ],
+              "Code lines": [
+                "return c.Next()"
+              ]
+            },
+            {
+              "Primary Functional Area": "Data Management and Integrity",
+              "Sub Functional Area": "Data Processing",
+              "Example issues to look for": [
+                "Data Element Aggregating an Excessively Large Number of Non-Primitive Elements",
+                "Excessive Data Query Operations in a Large Data Table",
+                "Missing Serialization Control Element",
+                "Excessive Execution of Sequential Searches of Data Resource",
+                "Data Resource Access without Use of Connection Pooling",
+                "Non-SQL Invokable Control Element with Excessive Number of Data Resource Accesses",
+                "Excessive Index Range Scan for a Data Resource",
+                "Reliance on Machine-Dependent Data Representation",
+                "Missing XML Validation",
+                "Improper Handling of Length Parameter Inconsistency",
+                "Collapse of Data into Unsafe Value",
+                "Improper Handling of Structural Elements",
+                "Acceptance of Extraneous Untrusted Data With Trusted Data",
+                "Improper Handling of Highly Compressed Data (Data Amplification)",
+                "Deserialization of Untrusted Data",
+                "Dangling Database Cursor ('Cursor Injection')"
+              ],
+              "Code lines": [
+                "allowOrigin := \"\"",
+                "// Check allowed origins",
+                "didx := strings.Index(domain, \":\")",
+                "pidx := strings.Index(pattern, \":\")",
+                "return didx != -1 && pidx != -1 && domain[:didx] == pattern[:pidx]",
+                "}",
+                "// matchSubdomain compares authority with wildcard"
+              ]
+            },
+            {
+              "Primary Functional Area": "Data Management and Integrity",
+              "Sub Functional Area": "Data Validation",
+              "Example issues to look for": [
+                "Misinterpretation of Input",
+                "Improper Use of Validation Framework",
+                "Improper Validation of Unsafe Equivalence in Input",
+                "Incorrect Parsing of Numbers with Different Radices",
+                "Improper Handling of Missing Special Element",
+                "Improper Handling of Additional Special Element",
+                "Improper Handling of Inconsistent Special Elements",
+                "Improper Handling of Case Sensitivity",
+                "Incorrect Behavior Order: Early Validation",
+                "Improper Handling of Values",
+                "Improper Handling of Parameters",
+                "Unchecked Input for Loop Condition"
+              ],
+              "Code lines": [
+                "if o == \"*\" {",
+                "allowOrigin = \"*\"",
+                "break",
+                "}",
+                "if o == origin {",
+                "allowOrigin = o",
+                "break",
+                "}",
+                "if matchSubdomain(origin, o) {",
+                "allowOrigin = origin",
+                "break",
+                "}",
+                "}",
+                "// handling the value in 'AllowOrigins' does",
+                "if cfg.AllowOriginsFunc(origin) {",
+                "allowOrigin = origin",
+                "}",
+                "}",
+                "c.Set(fiber.HeaderAccessControlAllowOrigin, allowOrigin)",
+                "if !matchScheme(domain, pattern) {",
+                "return false",
+                "}",
+                "didx := strings.Index(domain, \"://\")",
+                "pidx := strings.Index(pattern, \"://\")",
+                "if didx == -1 || pidx == -1 {",
+                "return false",
+                "}",
+                "domAuth := domain[didx+3:]",
+                "// to avoid long loop by invalid long domain",
+                "const maxDomainLen = 253",
+                "if len(domAuth) > maxDomainLen {",
+                "return false",
+                "}",
+                "patAuth := pattern[pidx+3:]",
+                "domComp := strings.Split(domAuth, \".\")",
+                "patComp := strings.Split(patAuth, \".\")",
+                "const divHalf = 2",
+                "for i := len(domComp)/divHalf - 1; i >= 0; i-- {",
+                "opp := len(domComp) - 1 - i",
+                "domComp[i], domComp[opp] = domComp[opp], domComp[i]",
+                "}",
+                "for i := len(patComp)/divHalf - 1; i >= 0; i-- {",
+                "opp := len(patComp) - 1 - i",
+                "patComp[i], patComp[opp] = patComp[opp], patComp[i]",
+                "}",
+                "for i, v := range domComp {",
+                "if len(patComp) <= i {",
+                "return false",
+                "}",
+                "p := patComp[i]",
+                "if p == \"*\" {",
+                "return true",
+                "}",
+                "if p != v {",
+                "return false",
+                "}",
+                "}",
+                "return false",
+                "}"
+              ]
+            },
+            {
+              "Primary Functional Area": "Security and Access Control",
+              "Sub Functional Area": "Credentials Management",
+              "Example issues to look for": [
+                "Use of Default Credentials",
+                "Plaintext Storage of a Password",
+                "Storing Passwords in a Recoverable Format",
+                "Password in Configuration File",
+                "Weak Encoding for Password",
+                "Not Using Password Aging",
+                "Password Aging with Long Expiration",
+                "Weak Password Requirements",
+                "Unprotected Transport of Credentials",
+                "Missing Password Field Masking",
+                "Unverified Password Change",
+                "Weak Password Recovery Mechanism for Forgotten Password",
+                "Use of Hard-coded Credentials",
+                "Use of Password Hash Instead of Password for Authentication"
+              ],
+              "Code lines": [
+                "c.Set(fiber.HeaderAccessControlAllowCredentials, \"true\")",
+                "}"
+              ]
+            }
+          ]
+        },
+        "scan_response": {
+          "vuln_score": 4,
+          "exploitable_vuln": false,
+          "description": "The provided code primarily deals with CORS (Cross-Origin Resource Sharing) settings, which are crucial for web security. However, the code does not exhibit any direct security vulnerabilities based on the provided lines. The code includes setting headers for 'Access-Control-Allow-Origin', 'Access-Control-Allow-Methods', and 'Access-Control-Allow-Credentials'.\n\n1. **Potential Issue**: The use of 'allowOrigin = \"*\"' can be a security concern if not handled properly, as it allows any origin to access the resource. However, this is a common practice in development environments and not inherently a vulnerability unless used in production without proper validation.\n\n2. **Code Analysis**: The code checks for specific origins and matches subdomains, which is a good practice. The function 'matchSubdomain' is used to compare domains, and there is a check for maximum domain length, which helps prevent certain types of attacks.\n\n3. **Constraints**: The code does not show any exploitable vulnerabilities directly. The potential issue with 'allowOrigin = \"*\"' is more of a configuration concern rather than a code vulnerability.\n\nOverall, the code is not exploitable as it stands, but care should be taken to ensure that 'allowOrigin = \"*\"' is not used in production environments without proper validation. The score of 4 reflects the need for careful configuration rather than a direct code vulnerability."
+        }
+      }
+    ]
+  }
+]

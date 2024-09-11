@@ -1,0 +1,121 @@
+[
+  {
+    "id": "CVE-2024-25124",
+    "scan_type": "before",
+    "scan_responses": [
+      {
+        "code_block": {
+          "Primary Functional Area": "API and Functionality Management",
+          "Sub Functional Area": "Initialization and Cleanup",
+          "Example issues to look for": [
+            "Initialization of a Resource with an Insecure Default",
+            "Non-exit on Failed Initialization"
+          ],
+          "Code lines": [
+            "// AllowOriginsFunc defines a function that will set the 'access-control-allow-origin'",
+            "// AllowOrigin defines a list of origins that may access the resource.",
+            "// AllowCredentials indicates whether or not the response to the request",
+            "log.Warn(\"[CORS] Both 'AllowOrigins' and 'AllowOriginsFunc' have been defined.\")",
+            "}"
+          ]
+        },
+        "scan_response": {
+          "vuln_score": 4,
+          "exploitable_vuln": false,
+          "description": "The code snippet indicates a potential issue with CORS (Cross-Origin Resource Sharing) configuration. The warning log suggests that both 'AllowOrigins' and 'AllowOriginsFunc' are defined, which could lead to conflicting CORS policies. While this does not present a direct exploitable vulnerability, it can lead to misconfigurations that may allow unintended origins to access the resource. To mitigate this, ensure that only one method of defining allowed origins is used, and validate the origins against a trusted list."
+        }
+      },
+      {
+        "code_block": {
+          "Primary Functional Area": "API and Functionality Management",
+          "Sub Functional Area": "Data / Function Handling",
+          "Example issues to look for": [
+            "Invokable Control Element with Excessive File or Data Access Operations",
+            "Reliance on Runtime Component in Generated Code",
+            "Use of Inherently Dangerous Function",
+            "Symbolic Name not Mapping to Correct Object",
+            "Use of NullPointerException Catch to Detect NULL Pointer Dereference",
+            "Deployment of Wrong Handler",
+            "Missing Handler",
+            "Use of Function with Inconsistent Implementations",
+            "Undefined Behavior for Input to API",
+            "Use of Obsolete Function",
+            "Exposed Dangerous Method or Function",
+            "Improper Control of Generation of Code ('Code Injection')"
+          ],
+          "Code lines": [
+            "allowOrigin := \"\"",
+            "// Check allowed origins",
+            "if o == \"*\" {",
+            "break",
+            "allowOrigin = o",
+            "break",
+            "allowOrigin = origin",
+            "break",
+            "if cfg.AllowOriginsFunc(origin) {",
+            "allowOrigin = origin",
+            "}",
+            "c.Set(fiber.HeaderAccessControlAllowMethods, allowMethods)",
+            "// Set Allow-Credentials if set to true",
+            "}",
+            "if !matchScheme(domain, pattern) {",
+            "return false",
+            "return false",
+            "// to avoid long loop by invalid long domain",
+            "return false",
+            "patComp := strings.Split(patAuth, \".\")",
+            "const divHalf = 2",
+            "opp := len(domComp) - 1 - i",
+            "if len(patComp) <= i {",
+            "}"
+          ]
+        },
+        "scan_response": {
+          "vuln_score": 6,
+          "exploitable_vuln": true,
+          "description": "The code contains a potential vulnerability related to the handling of allowed origins in a CORS (Cross-Origin Resource Sharing) context. Specifically, the use of a wildcard '*' for allowed origins can lead to security risks, as it permits any origin to access the API. This can expose sensitive data to malicious websites. The code should implement a more restrictive approach by validating and whitelisting specific origins instead of allowing all. The relevant code line is: 'if o == \"*\" {'."
+        }
+      },
+      {
+        "code_block": {
+          "Primary Functional Area": "API and Functionality Management",
+          "Sub Functional Area": "Type Handling",
+          "Example issues to look for": [
+            "Off-by-one Error",
+            "Improper Handling of Unexpected Data Type",
+            "Insufficient Type Distinction",
+            "Access of Resource Using Incompatible Type ('Type Confusion')",
+            "Improper Control of Dynamically-Identified Variables"
+          ],
+          "Code lines": [
+            "didx := strings.Index(domain, \":\")",
+            "// matchSubdomain compares authority with wildcard"
+          ]
+        },
+        "scan_response": {
+          "vuln_score": 4,
+          "exploitable_vuln": false,
+          "description": "The code line 'didx := strings.Index(domain, \":\")' indicates that the code is attempting to find the index of a colon in the 'domain' string. If 'domain' is not properly validated or sanitized, this could lead to unexpected behavior if the input is not as expected. However, this does not present a direct exploitable vulnerability as it does not lead to a security incident on its own. It is more of a code hardening suggestion to ensure that 'domain' is of the expected format before processing."
+        }
+      },
+      {
+        "code_block": {
+          "Primary Functional Area": "Data Management and Integrity",
+          "Sub Functional Area": "String Handling",
+          "Example issues to look for": [
+            "Improper Null Termination"
+          ],
+          "Code lines": [
+            "return c.Next()",
+            "}"
+          ]
+        },
+        "scan_response": {
+          "vuln_score": 3,
+          "exploitable_vuln": false,
+          "description": "The code snippet provided does not explicitly show any issues related to string handling or improper null termination. The lines 'return c.Next()' and '}' do not provide enough context to identify any vulnerabilities. However, if this code is part of a larger function that handles strings, it is essential to ensure that strings are properly null-terminated to prevent buffer overflows or memory corruption. As it stands, there are no observable vulnerabilities in the provided code."
+        }
+      }
+    ]
+  }
+]

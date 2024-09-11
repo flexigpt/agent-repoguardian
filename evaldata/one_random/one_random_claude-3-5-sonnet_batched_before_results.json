@@ -1,0 +1,9 @@
+[
+  {
+    "id": "CVE-2024-25124",
+    "scan_type": "before",
+    "scan_responses": [
+      "1 validation error for VulnerabilityPromptResponse\ndescription\n  Field required [type=missing, input_value={'vuln': True}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.8/v/missing"
+    ]
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "CVE-2024-25124",
+    "scan_type": "after",
+    "vulnerability_labels": [
+      {
+        "line_nos": [
+          30,
+          31,
+          88
+        ],
+        "vulnerability_category_labels": [
+          "CORSMisconfiguration",
+          "CORSMisconfiguration",
+          "CORSMisconfiguration"
+        ]
+      }
+    ],
+    "scan_responses": [
+      {
+        "vuln": true,
+        "description": "The provided code lines exhibit a CORS misconfiguration vulnerability. Specifically, the configuration allows credentials to be sent with requests from any origin (indicated by the wildcard '*'). This is a significant security risk because it can lead to unauthorized access to sensitive user data. When 'AllowCredentials' is set to true, 'AllowOrigins' should not be set to '*', as this allows any website to make requests with the user's credentials, potentially exposing the user's session to malicious sites. \n\n### Vulnerable Lines:\n1. **Line 30 & 31:** The code checks if 'AllowCredentials' is true and 'AllowOrigins' is set to '*', and it panics, indicating an insecure setup. While this is a good practice to catch misconfigurations, it does not prevent the issue from occurring in the first place. \n2. **Line 88:** The warning log indicates that 'AllowCredentials' is true, but 'AllowOrigins' is set to '*', which is a misconfiguration. \n\n### Mitigation Suggestions:\n- Change the configuration to specify allowed origins explicitly instead of using '*'. For example, use a list of trusted domains.\n- Implement additional checks to ensure that 'AllowOrigins' is not set to '*' when 'AllowCredentials' is true, and handle such cases gracefully without allowing the application to panic."
+      }
+    ]
+  }
+]

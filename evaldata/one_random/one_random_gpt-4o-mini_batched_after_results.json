@@ -1,0 +1,12 @@
+[
+  {
+    "id": "CVE-2024-25124",
+    "scan_type": "after",
+    "scan_responses": [
+      {
+        "vuln": true,
+        "description": "The provided code contains several potential vulnerabilities related to CORS (Cross-Origin Resource Sharing) configuration:\n\n1. **Wildcard Origin with Credentials**: The code checks if `AllowCredentials` is true and `AllowOrigins` is set to '*', which is a known security risk. This allows any origin to send credentials, which can lead to unauthorized access to sensitive data. The code correctly panics in this case, but it is crucial to ensure that this check is always enforced.\n\n2. **Dynamic Origin Evaluation**: The use of `AllowOriginsFunc` allows for dynamic evaluation of allowed origins. If this function is not properly implemented, it could lead to security vulnerabilities by allowing untrusted origins. The implementation of this function should be thoroughly reviewed to ensure it does not inadvertently allow malicious origins.\n\n3. **Improper Origin Validation**: The `validateDomain` function allows for wildcard subdomain matching, which can be exploited if not handled correctly. For example, if a domain like 'example.com' is allowed, a malicious actor could use a subdomain like 'malicious.example.com' to gain access. The logic should ensure that only specific subdomains are allowed, and not just any subdomain.\n\n4. **Lack of Logging for Invalid Origins**: While the code logs a warning for invalid origins, it panics immediately after. This could lead to a denial of service if an invalid origin is provided repeatedly. Instead, it might be better to handle this more gracefully, perhaps by returning an error response without crashing the application.\n\n5. **Potential for Open Redirects**: The `normalizeOrigin` function does not validate the origin against a whitelist of allowed origins. If an attacker can control the input to this function, they may be able to redirect users to malicious sites. Proper validation against a known list of allowed origins should be implemented.\n\nOverall, while the code has some checks in place, there are still several areas where vulnerabilities could be introduced, particularly around dynamic origin evaluation and wildcard handling."
+      }
+    ]
+  }
+]

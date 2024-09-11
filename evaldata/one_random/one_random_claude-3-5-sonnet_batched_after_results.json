@@ -1,0 +1,12 @@
+[
+  {
+    "id": "CVE-2024-25124",
+    "scan_type": "after",
+    "scan_responses": [
+      {
+        "vuln": true,
+        "description": "The code contains a potential security vulnerability in the CORS (Cross-Origin Resource Sharing) implementation. In the file middleware/cors/cors.go, there's a check for AllowCredentials and AllowOrigins that aims to prevent an insecure configuration. However, this check is performed using a panic:\n\nif cfg.AllowCredentials && cfg.AllowOrigins == \"*\" {\n    panic(\"[CORS] Insecure setup, 'AllowCredentials' is set to true, and 'AllowOrigins' is set to a wildcard.\")\n}\n\nWhile this does prevent the insecure configuration, using panic() in production code can lead to denial of service vulnerabilities. An attacker could potentially trigger this panic by manipulating the configuration, causing the application to crash.\n\nAdditionally, there's another panic used when validating origins:\n\nif isValid {\n    validatedOrigins = append(validatedOrigins, normalizedOrigin)\n} else {\n    log.Warnf(\"[CORS] Invalid origin format in configuration: %s\", origin)\n    panic(\"[CORS] Invalid origin provided in configuration\")\n}\n\nThis also presents a potential denial of service vulnerability if an attacker can influence the configuration.\n\nRecommendation: Instead of using panic(), consider logging the error and using a more graceful error handling mechanism that doesn't crash the application. This could involve returning an error from the function and handling it appropriately at a higher level in the application."
+      }
+    ]
+  }
+]

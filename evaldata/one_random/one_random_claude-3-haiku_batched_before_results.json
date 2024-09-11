@@ -1,0 +1,12 @@
+[
+  {
+    "id": "CVE-2024-25124",
+    "scan_type": "before",
+    "scan_responses": [
+      {
+        "vuln": false,
+        "description": "The provided code does not appear to have any obvious vulnerabilities. It is a CORS middleware implementation in Go that checks the origin of incoming requests and sets the appropriate CORS headers in the response. The code follows security best practices, such as:\n\n1. Allowing a list of specific origins or using a callback function to determine allowed origins.\n2. Handling the case where both `AllowOrigins` and `AllowOriginsFunc` are defined.\n3. Checking for subdomain matching using the `matchSubdomain` function.\n4. Setting the appropriate CORS headers, including `Access-Control-Allow-Origin`, `Access-Control-Allow-Methods`, and `Access-Control-Allow-Credentials`.\n\nOverall, the code appears to be well-designed and secure, with no obvious vulnerabilities detected."
+      }
+    ]
+  }
+]

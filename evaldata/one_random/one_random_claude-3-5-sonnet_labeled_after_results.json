@@ -1,0 +1,84 @@
+[
+  {
+    "id": "CVE-2024-25124",
+    "scan_type": "after",
+    "vulnerability_labels": [
+      {
+        "line_nos": [
+          30,
+          31,
+          61,
+          62,
+          63,
+          73,
+          74,
+          78,
+          79,
+          84,
+          85,
+          91,
+          116,
+          117,
+          118,
+          119,
+          127,
+          128,
+          132,
+          133,
+          134,
+          135,
+          136,
+          137,
+          149,
+          150,
+          164,
+          165,
+          170,
+          171,
+          176,
+          177
+        ],
+        "vulnerability_category_labels": [
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "CORS Misconfiguration",
+          "URL Parsing",
+          "URL Parsing",
+          "URL Parsing",
+          "URL Parsing",
+          "URL Parsing",
+          "URL Parsing",
+          "URL Parsing",
+          "URL Parsing"
+        ]
+      }
+    ],
+    "scan_responses": [
+      {
+        "vuln": true,
+        "description": ""
+      }
+    ]
+  }
+]

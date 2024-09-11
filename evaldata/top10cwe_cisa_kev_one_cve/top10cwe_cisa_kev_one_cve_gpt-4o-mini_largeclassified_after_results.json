@@ -1,0 +1,970 @@
+[
+  {
+    "id": "CVE-2024-27918",
+    "scan_type": "after",
+    "scan_responses": [
+      {
+        "code_block": {
+          "categorized_lines": [
+            {
+              "Primary Functional Area": "Security and Access Control",
+              "Sub Functional Area": "Authorization",
+              "Example issues to look for": [
+                "Excessive Attack Surface",
+                "Insufficient Granularity of Access Control",
+                "Binding to an Unrestricted IP Address",
+                "Obscured Security-relevant Information by Alternate Name",
+                "Creation of chroot Jail Without Changing Working Directory",
+                "Unverified Ownership",
+                "Improperly Implemented Security Check for Standard",
+                "Trust of System Event Data",
+                "Passing Mutable Objects to an Untrusted Method",
+                "Returning a Mutable Object to an Untrusted Caller",
+                "Direct Request ('Forced Browsing')",
+                "Incomplete Model of Endpoint Features",
+                "External Initialization of Trusted Variables or Data Stores",
+                "Use of Externally-Controlled Input to Select Classes or Code ('Unsafe Reflection')",
+                "External Control of Assumed-Immutable Web Parameter",
+                "Trust Boundary Violation",
+                "Incorrect Behavior Order: Authorization Before Parsing and Canonicalization",
+                "Authorization Bypass Through User-Controlled Key",
+                "Improper Isolation or Compartmentalization",
+                "Reliance on Security Through Obscurity",
+                "Incorrect Ownership Assignment",
+                "Reliance on Untrusted Inputs in a Security Decision",
+                "Inclusion of Functionality from Untrusted Control Sphere",
+                "Improper Enforcement of a Single, Unique Action",
+                "Placement of User into Incorrect Group",
+                "Improperly Controlled Modification of Dynamically-Determined Object Attributes",
+                "Server-Side Request Forgery (SSRF)",
+                "Improper Authorization in Handler for Custom URL Scheme"
+              ],
+              "Code lines": [
+                "ok = false",
+                "emailSp := strings.Split(email, \"@\")",
+                "if len(emailSp) == 1 {",
+                "httpapi.Write(ctx, rw, http.StatusForbidden, codersdk.Response{",
+                "Message: fmt.Sprintf(\"Your email %q is not in domains %q!\", email, api.OIDCConfig.EmailDomain),",
+                "})",
+                "return",
+                "}",
+                "userEmailDomain := emailSp[len(emailSp)-1]",
+                "for _, domain := range api.OIDCConfig.EmailDomain {",
+                "if strings.EqualFold(userEmailDomain, domain) {",
+                "ok = true",
+                "break",
+                "}",
+                "}",
+                "if !ok {",
+                "httpapi.Write(ctx, rw, http.StatusForbidden, codersdk.Response{",
+                "Message: fmt.Sprintf(\"Your email %q is not in domains %q!\", email, api.OIDCConfig.EmailDomain),",
+                "})",
+                "return",
+                "}"
+              ]
+            },
+            {
+              "Primary Functional Area": "Data Management and Integrity",
+              "Sub Functional Area": "String Handling",
+              "Example issues to look for": [
+                "Improper Null Termination"
+              ],
+              "Code lines": [
+                "ok = false",
+                "emailSp := strings.Split(email, \"@\")",
+                "if len(emailSp) == 1 {",
+                "httpapi.Write(ctx, rw, http.StatusForbidden, codersdk.Response{",
+                "Message: fmt.Sprintf(\"Your email %q is not in domains %q!\", email, api.OIDCConfig.EmailDomain),",
+                "})",
+                "return",
+                "}",
+                "userEmailDomain := emailSp[len(emailSp)-1]"
+              ]
+            }
+          ]
+        },
+        "scan_response": {
+          "vuln_score": 4,
+          "exploitable_vuln": false,
+          "description": "The code checks if the user's email domain is part of a predefined list of allowed domains. While this is a good practice for authorization, the implementation has a potential issue with insufficient granularity of access control. If the list of allowed domains is not properly managed or if there are no checks for the format of the email, it could lead to unauthorized access. Additionally, the error messages returned do not provide enough information to the user, which could be improved for better user experience. However, there are no direct exploitable vulnerabilities present in the code."
+        }
+      }
+    ]
+  },
+  {
+    "id": "CVE-2024-31457",
+    "scan_type": "after",
+    "scan_responses": [
+      {
+        "code_block": {
+          "categorized_lines": [
+            {
+              "Primary Functional Area": "API and Functionality Management",
+              "Sub Functional Area": "Expression Issues",
+              "Example issues to look for": [
+                "Processor Optimization Removal or Modification of Security-critical Code",
+                "Excessive Use of Self-Modifying Code",
+                "Missing Default Case in Multiple Condition Expression",
+                "Use of Incorrect Operator",
+                "Incorrect Block Delimitation",
+                "Omitted Break Statement in Switch",
+                "Reachable Assertion",
+                "Executable Regular Expression Error",
+                "Permissive Regular Expression",
+                "Compiler Optimization Removal or Modification of Security-critical Code",
+                "Operator Precedence Logic Error",
+                "Loop with Unreachable Exit Condition ('Infinite Loop')"
+              ],
+              "Code lines": [
+                "return",
+                "}",
+                "if strings.Contains(a.PlugName, string(filepath.Separator)) {"
+              ]
+            },
+            {
+              "Primary Functional Area": "Data Management and Integrity",
+              "Sub Functional Area": "String Handling",
+              "Example issues to look for": [
+                "Improper Null Termination"
+              ],
+              "Code lines": [
+                "response.FailWithMessage(\"插件名称不能包含\"+string(filepath.Separator), c)",
+                "return",
+                "}"
+              ]
+            },
+            {
+              "Primary Functional Area": "Data Management and Integrity",
+              "Sub Functional Area": "Data Processing",
+              "Example issues to look for": [
+                "Data Element Aggregating an Excessively Large Number of Non-Primitive Elements",
+                "Excessive Data Query Operations in a Large Data Table",
+                "Missing Serialization Control Element",
+                "Excessive Execution of Sequential Searches of Data Resource",
+                "Data Resource Access without Use of Connection Pooling",
+                "Non-SQL Invokable Control Element with Excessive Number of Data Resource Accesses",
+                "Excessive Index Range Scan for a Data Resource",
+                "Reliance on Machine-Dependent Data Representation",
+                "Missing XML Validation",
+                "Improper Handling of Length Parameter Inconsistency",
+                "Collapse of Data into Unsafe Value",
+                "Improper Handling of Structural Elements",
+                "Acceptance of Extraneous Untrusted Data With Trusted Data",
+                "Improper Handling of Highly Compressed Data (Data Amplification)",
+                "Deserialization of Untrusted Data",
+                "Dangling Database Cursor ('Cursor Injection')"
+              ],
+              "Code lines": [
+                "a.NeedModel = a.HasRequest || a.HasResponse",
+                "err = autoCodeService.CreatePlug(a)"
+              ]
+            }
+          ]
+        },
+        "scan_response": {
+          "vuln_score": 6,
+          "exploitable_vuln": true,
+          "description": "The code contains several potential vulnerabilities related to string handling and data processing. Specifically, the use of 'response.FailWithMessage' with concatenated strings could lead to improper null termination, which may result in unexpected behavior or security issues. Additionally, the line 'a.NeedModel = a.HasRequest || a.HasResponse' could lead to improper handling of data if the conditions are not correctly validated, potentially allowing for untrusted data to be processed. These issues are exploitable as they can lead to application crashes or unexpected behavior, making them a concern for security."
+        }
+      }
+    ]
+  },
+  {
+    "id": "CVE-2014-125026",
+    "scan_type": "after",
+    "scan_responses": [
+      {
+        "code_block": {
+          "categorized_lines": [
+            {
+              "Primary Functional Area": "API and Functionality Management",
+              "Sub Functional Area": "Data / Function Handling",
+              "Example issues to look for": [
+                "Invokable Control Element with Excessive File or Data Access Operations",
+                "Reliance on Runtime Component in Generated Code",
+                "Use of Inherently Dangerous Function",
+                "Symbolic Name not Mapping to Correct Object",
+                "Use of NullPointerException Catch to Detect NULL Pointer Dereference",
+                "Deployment of Wrong Handler",
+                "Missing Handler",
+                "Use of Function with Inconsistent Implementations",
+                "Undefined Behavior for Input to API",
+                "Use of Obsolete Function",
+                "Exposed Dangerous Method or Function",
+                "Improper Control of Generation of Code ('Code Injection')"
+              ],
+              "Code lines": [
+                "if int(C.LZ4_decompress_safe(p(in), p(out), clen(in), clen(out))) < 0 {",
+                "return errors.New(\"Malformed compression stream\")",
+                "}",
+                "return nil",
+                "}"
+              ]
+            },
+            {
+              "Primary Functional Area": "Data Management and Integrity",
+              "Sub Functional Area": "Data Processing",
+              "Example issues to look for": [
+                "Data Element Aggregating an Excessively Large Number of Non-Primitive Elements",
+                "Excessive Data Query Operations in a Large Data Table",
+                "Missing Serialization Control Element",
+                "Excessive Execution of Sequential Searches of Data Resource",
+                "Data Resource Access without Use of Connection Pooling",
+                "Non-SQL Invokable Control Element with Excessive Number of Data Resource Accesses",
+                "Excessive Index Range Scan for a Data Resource",
+                "Reliance on Machine-Dependent Data Representation",
+                "Missing XML Validation",
+                "Improper Handling of Length Parameter Inconsistency",
+                "Collapse of Data into Unsafe Value",
+                "Improper Handling of Structural Elements",
+                "Acceptance of Extraneous Untrusted Data With Trusted Data",
+                "Improper Handling of Highly Compressed Data (Data Amplification)",
+                "Deserialization of Untrusted Data",
+                "Dangling Database Cursor ('Cursor Injection')"
+              ],
+              "Code lines": [
+                "if int(C.LZ4_decompress_safe(p(in), p(out), clen(in), clen(out))) < 0 {",
+                "return errors.New(\"Malformed compression stream\")",
+                "}",
+                "return nil",
+                "}"
+              ]
+            }
+          ]
+        },
+        "scan_response": {
+          "vuln_score": 6,
+          "exploitable_vuln": true,
+          "description": "The code uses the function 'C.LZ4_decompress_safe' to decompress data. If the input data is malformed or manipulated, it can lead to a 'Malformed compression stream' error. This indicates that the function does not handle all potential edge cases, which could allow an attacker to exploit this by providing specially crafted input that could lead to denial of service or other unexpected behavior. The lack of validation on the input data before processing is a concern, as it may allow for untrusted data to be processed without proper checks."
+        }
+      }
+    ]
+  },
+  {
+    "id": "CVE-2020-24710",
+    "scan_type": "after",
+    "scan_responses": [
+      {
+        "code_block": {
+          "categorized_lines": [
+            {
+              "Primary Functional Area": "API and Functionality Management",
+              "Sub Functional Area": "Initialization and Cleanup",
+              "Example issues to look for": [
+                "Initialization of a Resource with an Insecure Default",
+                "Non-exit on Failed Initialization"
+              ],
+              "Code lines": [
+                "ListenURL            string   `json:\"listen_url\"`",
+                "UseTLS               bool     `json:\"use_tls\"`",
+                "CertPath             string   `json:\"cert_path\"`",
+                "KeyPath              string   `json:\"key_path\"`",
+                "CSRFKey              string   `json:\"csrf_key\"`",
+                "AllowedInternalHosts []string `json:\"allowed_internal_hosts\"`",
+                "}",
+                "ListenURL string `json:\"listen_url\"`",
+                "UseTLS    bool   `json:\"use_tls\"`",
+                "CertPath  string `json:\"cert_path\"`",
+                "KeyPath   string `json:\"key_path\"`",
+                "}",
+                "AdminConf      AdminServer `json:\"admin_server\"`",
+                "PhishConf      PhishServer `json:\"phish_server\"`",
+                "DBName         string      `json:\"db_name\"`",
+                "DBPath         string      `json:\"db_path\"`",
+                "DBSSLCaPath    string      `json:\"db_sslca_path\"`",
+                "MigrationsPath string      `json:\"migrations_prefix\"`",
+                "TestFlag       bool        `json:\"test_flag\"`",
+                "ContactAddress string      `json:\"contact_address\"`",
+                "Logging        *log.Config `json:\"logging\"`",
+                "}"
+              ]
+            },
+            {
+              "Primary Functional Area": "API and Functionality Management",
+              "Sub Functional Area": "Data / Function Handling",
+              "Example issues to look for": [
+                "Invokable Control Element with Excessive File or Data Access Operations",
+                "Reliance on Runtime Component in Generated Code",
+                "Use of Inherently Dangerous Function",
+                "Symbolic Name not Mapping to Correct Object",
+                "Use of NullPointerException Catch to Detect NULL Pointer Dereference",
+                "Deployment of Wrong Handler",
+                "Missing Handler",
+                "Use of Function with Inconsistent Implementations",
+                "Undefined Behavior for Input to API",
+                "Use of Obsolete Function",
+                "Exposed Dangerous Method or Function",
+                "Improper Control of Generation of Code ('Code Injection')"
+              ],
+              "Code lines": [
+                "// Get the config file",
+                "if err != nil {",
+                "return nil, err",
+                "if err != nil {",
+                "return nil, err",
+                "}",
+                "config.Logging = &log.Config{}",
+                "// Explicitly set the TestFlag to false to prevent config.json overrides",
+                "return config, nil",
+                "}",
+                "URL              string `json:\"url\"`",
+                "IncludeResources bool   `json:\"include_resources\"`",
+                "}",
+                "HTML string `json:\"html\"`",
+                "}",
+                "Text    string `json:\"text\"`",
+                "HTML    string `json:\"html\"`",
+                "Subject string `json:\"subject\"`",
+                "}",
+                "ts, err := util.ParseCSV(r)",
+                "if err != nil {",
+                "JSONResponse(w, models.Response{Success: false, Message: \"Error parsing CSV\"}, http.StatusInternalServerError)",
+                "return",
+                "}",
+                "}",
+                "if r.Method != \"POST\" {",
+                "JSONResponse(w, models.Response{Success: false, Message: \"Method not allowed\"}, http.StatusBadRequest)",
+                "return",
+                "}",
+                "Content      string `json:\"content\"`",
+                "if err != nil {",
+                "JSONResponse(w, models.Response{Success: false, Message: \"Error decoding JSON Request\"}, http.StatusBadRequest)",
+                "return",
+                "}",
+                "if err != nil {",
+                "log.Error(err)",
+                "// If the user wants to convert links to point to",
+                "d, err := goquery.NewDocumentFromReader(bytes.NewReader(e.HTML))",
+                "if err != nil {",
+                "JSONResponse(w, models.Response{Success: false, Message: err.Error()}, http.StatusBadRequest)",
+                "return",
+                "}",
+                "if err != nil {",
+                "}",
+                "Subject: e.Subject,",
+                "Text:    string(e.Text),",
+                "HTML:    string(e.HTML),",
+                "}",
+                "}",
+                "cr := cloneRequest{}",
+                "if r.Method != \"POST\" {",
+                "JSONResponse(w, models.Response{Success: false, Message: \"Method not allowed\"}, http.StatusBadRequest)",
+                "return",
+                "}",
+                "if err != nil {",
+                "JSONResponse(w, models.Response{Success: false, Message: \"Error decoding JSON Request\"}, http.StatusBadRequest)",
+                "return",
+                "}",
+                "JSONResponse(w, models.Response{Success: false, Message: err.Error()}, http.StatusBadRequest)",
+                "tr := &http.Transport{",
+                "DialContext: restrictedDialer.DialContext,",
+                "TLSClientConfig: &tls.Config{",
+                "InsecureSkipVerify: true,",
+                "},",
+                "}",
+                "resp, err := client.Get(cr.URL)",
+                "if err != nil {",
+                "JSONResponse(w, models.Response{Success: false, Message: err.Error()}, http.StatusBadRequest)",
+                "return",
+                "JSONResponse(w, models.Response{Success: false, Message: err.Error()}, http.StatusBadRequest)",
+                "return",
+                "}",
+                "if d.Find(\"head base\").Length() == 0 {",
+                "d.Find(\"head\").PrependHtml(fmt.Sprintf(\"<base href=\\\"%s\\\">\", cr.URL))",
+                "forms.Each(func(i int, f *goquery.Selection) {",
+                "// We'll want to store where we got the form from",
+                "// (the current URL)",
+                "if !strings.HasPrefix(url, \"http\") {",
+                "url = fmt.Sprintf(\"%s%s\", cr.URL, url)",
+                "}",
+                "})",
+                "if err != nil {",
+                "JSONResponse(w, cs, http.StatusOK)",
+                "}"
+              ]
+            },
+            {
+              "Primary Functional Area": "Data Management and Integrity",
+              "Sub Functional Area": "Data Validation",
+              "Example issues to look for": [
+                "Misinterpretation of Input",
+                "Improper Use of Validation Framework",
+                "Improper Validation of Unsafe Equivalence in Input",
+                "Incorrect Parsing of Numbers with Different Radices",
+                "Improper Handling of Missing Special Element",
+                "Improper Handling of Additional Special Element",
+                "Improper Handling of Inconsistent Special Elements",
+                "Improper Handling of Case Sensitivity",
+                "Incorrect Behavior Order: Early Validation",
+                "Improper Handling of Values",
+                "Improper Handling of Parameters",
+                "Unchecked Input for Loop Condition"
+              ],
+              "Code lines": [
+                "if cr.URL == \"\" {",
+                "return errors.New(\"No URL Specified\")",
+                "}",
+                "}"
+              ]
+            },
+            {
+              "Primary Functional Area": "Concurrency and Resource Management",
+              "Sub Functional Area": "Resource Management",
+              "Example issues to look for": [
+                "Excessive Platform Resource Consumption within a Loop",
+                "Multiple Releases of Same Resource or Handle",
+                "Insufficient Resource Pool",
+                "Incomplete Cleanup",
+                "Deletion of Data Structure Sentinel",
+                "Addition of Data Structure Sentinel",
+                "Multiple Binds to the Same Port",
+                "Use of Multiple Resources with Duplicate Identifier",
+                "Allocation of Resources Without Limits or Throttling",
+                "Missing Reference to Active Allocated Resource",
+                "Missing Release of Resource after Effective Lifetime",
+                "Premature Release of Resource During Expected Lifetime",
+                "Use of Uninitialized Resource",
+                "Missing Initialization of Resource",
+                "Use of Expired File Descriptor",
+                "Improper Restriction of Power Consumption"
+              ],
+              "Code lines": [
+                "allowedHosts []*net.IPNet",
+                "}",
+                "// SetAllowedHosts sets the list of allowed hosts or IP ranges for the default",
+                "// dialer.",
+                "DefaultDialer.SetAllowedHosts(allowed)",
+                "}",
+                "ranges := []string{}",
+                "for _, ipRange := range d.allowedHosts {",
+                "ranges = append(ranges, ipRange.String())",
+                "}",
+                "}",
+                "for _, ipRange := range allowed {",
+                "// For flexibility, try to parse as an IP first since this will",
+                "// undoubtedly cause issues. If it works, then just append the",
+                "// appropriate subnet mask, then parse as CIDR",
+                "if singleIP := net.ParseIP(ipRange); singleIP != nil {",
+                "if singleIP.To4() != nil {",
+                "ipRange += \"/32\"",
+                "} else {",
+                "ipRange += \"/128\"",
+                "}",
+                "if err != nil {",
+                "return fmt.Errorf(\"provided ip range is not valid CIDR notation: %v\", err)",
+                "}",
+                "}",
+                "return DefaultDialer.Dialer()",
+                "}",
+                "return &net.Dialer{",
+                "Timeout:   30 * time.Second,",
+                "KeepAlive: 30 * time.Second,",
+                "Control:   restrictedControl(d.allowedHosts),",
+                "}",
+                "type restrictedDialer struct {",
+                "*net.Dialer",
+                "allowed []string",
+                "}",
+                "return func(network string, address string, conn syscall.RawConn) error {",
+                "if !(network == \"tcp4\" || network == \"tcp6\") {",
+                "return fmt.Errorf(\"%s is not a safe network type\", network)",
+                "}",
+                "if err != nil {",
+                "return fmt.Errorf(\"%s is not a valid host/port pair: %s\", address, err)",
+                "}",
+                "if ip == nil {",
+                "return fmt.Errorf(\"%s is not a valid IP address\", host)",
+                "}",
+                "if len(allowed) > 0 {",
+                "denyList = allInternal",
+                "}",
+                "if ipRange.Contains(ip) {",
+                "return nil",
+                "}",
+                "for _, ipRange := range denyList {",
+                "_, parsed, err := net.ParseCIDR(ipRange)",
+                "if err != nil {",
+                "return fmt.Errorf(\"error parsing denied range: %v\", err)",
+                "}",
+                "return fmt.Errorf(\"upstream connection denied to internal host\")",
+                "}",
+                "}",
+                "}",
+                "}"
+              ]
+            }
+          ]
+        },
+        "scan_response": {
+          "vuln_score": 6,
+          "exploitable_vuln": true,
+          "description": "The code contains several vulnerabilities related to improper handling of input and insecure configurations. Notably, the use of 'InsecureSkipVerify: true' in the TLS configuration can lead to man-in-the-middle attacks, as it disables certificate verification. Additionally, the lack of validation for the 'cr.URL' input could allow for misinterpretation of input, leading to potential injection attacks. The presence of multiple error handling paths without sufficient context may also lead to unhandled exceptions, which could be exploited. Overall, these issues present a moderate risk, warranting a score of 6."
+        }
+      },
+      {
+        "code_block": {
+          "categorized_lines": [
+            {
+              "Primary Functional Area": "API and Functionality Management",
+              "Sub Functional Area": "Initialization and Cleanup",
+              "Example issues to look for": [
+                "Initialization of a Resource with an Insecure Default",
+                "Non-exit on Failed Initialization"
+              ],
+              "Code lines": [
+                "/*",
+                "\"fmt\"",
+                "\"io/ioutil\"",
+                "\"net/http\"",
+                "\"os\"",
+                "\"os/signal\"",
+                "\"gopkg.in/alecthomas/kingpin.v2\"",
+                "\"github.com/gophish/gophish/config\"",
+                "\"github.com/gophish/gophish/controllers\"",
+                "\"github.com/gophish/gophish/dialer\"",
+                "\"github.com/gophish/gophish/imap\"",
+                "log \"github.com/gophish/gophish/logger\"",
+                "\"github.com/gophish/gophish/middleware\"",
+                "\"github.com/gophish/gophish/models\"",
+                "\"github.com/gophish/gophish/webhook\"",
+                ")",
+                "import ("
+              ]
+            },
+            {
+              "Primary Functional Area": "API and Functionality Management",
+              "Sub Functional Area": "Data / Function Handling",
+              "Example issues to look for": [
+                "Invokable Control Element with Excessive File or Data Access Operations",
+                "Reliance on Runtime Component in Generated Code",
+                "Use of Inherently Dangerous Function",
+                "Symbolic Name not Mapping to Correct Object",
+                "Use of NullPointerException Catch to Detect NULL Pointer Dereference",
+                "Deployment of Wrong Handler",
+                "Missing Handler",
+                "Use of Function with Inconsistent Implementations",
+                "Undefined Behavior for Input to API",
+                "Use of Obsolete Function",
+                "Exposed Dangerous Method or Function",
+                "Improper Control of Generation of Code ('Code Injection')"
+              ],
+              "Code lines": [
+                "// Load the version",
+                "if err != nil {",
+                "log.Fatal(err)",
+                "}",
+                "// Parse the CLI flags and load the config",
+                "kingpin.Parse()",
+                "// Load the config",
+                "// Just warn if a contact address hasn't been configured",
+                "log.Fatal(err)",
+                "}",
+                "log.Warnf(\"No contact address has been configured.\")",
+                "log.Warnf(\"Please consider adding a contact_address entry in your config.json\")",
+                "}",
+                "// Configure our various upstream clients to make sure that we restrict",
+                "webhook.SetTransport(&http.Transport{",
+                "DialContext: dialer.Dialer().DialContext,",
+                "if err != nil {",
+                "log.Fatal(err)",
+                "// Setup the global variables and settings",
+                "if err != nil {",
+                "log.Fatal(err)",
+                "// when Gophish was last shutdown.",
+                "if err != nil {",
+                "log.Fatal(err)",
+                "func (mbox *Mailbox) newClient() (*client.Client, error) {",
+                "var imapClient *client.Client",
+                "var err error",
+                "if mbox.TLS {",
+                "config := new(tls.Config)",
+                "config.InsecureSkipVerify = mbox.IgnoreCertErrors",
+                "imapClient, err = client.DialWithDialerTLS(restrictedDialer, mbox.Host, config)",
+                "} else {",
+                "imapClient, err = client.DialWithDialer(restrictedDialer, mbox.Host)",
+                "}",
+                "return imapClient, err",
+                "if err != nil {",
+                "return imapClient, err",
+                "if err != nil {",
+                "return imapClient, err",
+                "}"
+              ]
+            },
+            {
+              "Primary Functional Area": "Concurrency and Resource Management",
+              "Sub Functional Area": "MultiThreading/Concurrency",
+              "Example issues to look for": [
+                "Invokable Control Element in Multi-Thread Context with non-Final Static Storable or Member Element",
+                "Unintended Reentrant Invocation of Non-reentrant Code Via Nested Calls",
+                "Use of Blocking Code in Single-threaded, Non-blocking Context",
+                "Race Condition within a Thread",
+                "Time-of-check Time-of-use (TOCTOU) Race Condition",
+                "Context Switching Race Condition",
+                "Use of a Non-reentrant Function in a Concurrent Context",
+                "Missing Synchronization",
+                "Incorrect Synchronization"
+              ],
+              "Code lines": [
+                "if *disableMailer {",
+                "adminOptions = append(adminOptions, controllers.WithWorker(nil))",
+                "adminServer := controllers.NewAdminServer(adminConfig, adminOptions...)",
+                "middleware.Store.Options.Secure = adminConfig.UseTLS",
+                "phishConfig := conf.PhishConf",
+                "phishServer := controllers.NewPhishingServer(phishConfig)",
+                "imapMonitor := imap.NewMonitor()",
+                "if *mode == \"admin\" || *mode == \"all\" {",
+                "go adminServer.Start()",
+                "go imapMonitor.Start()",
+                "}",
+                "}",
+                "c := make(chan os.Signal, 1)",
+                "signal.Notify(c, os.Interrupt)",
+                "<-c",
+                "log.Info(\"CTRL+C Received... Gracefully shutting down servers\")",
+                "if *mode == modeAdmin || *mode == modeAll {",
+                "adminServer.Shutdown()",
+                "imapMonitor.Shutdown()",
+                "}",
+                "}"
+              ]
+            },
+            {
+              "Primary Functional Area": "Data Management and Integrity",
+              "Sub Functional Area": "Data Validation",
+              "Example issues to look for": [
+                "Misinterpretation of Input",
+                "Improper Use of Validation Framework",
+                "Improper Validation of Unsafe Equivalence in Input",
+                "Incorrect Parsing of Numbers with Different Radices",
+                "Improper Handling of Missing Special Element",
+                "Improper Handling of Additional Special Element",
+                "Improper Handling of Inconsistent Special Elements",
+                "Improper Handling of Case Sensitivity",
+                "Incorrect Behavior Order: Early Validation",
+                "Improper Handling of Values",
+                "Improper Handling of Parameters",
+                "Unchecked Input for Loop Condition"
+              ],
+              "Code lines": [
+                "err := s.Validate()",
+                "if err != nil {",
+                "log.Error(err)",
+                "return err",
+                "}",
+                "mailServer := Mailbox{",
+                "Host:             s.Host,",
+                "TLS:              s.TLS,",
+                "IgnoreCertErrors: s.IgnoreCertErrors,",
+                "User:             s.Username,",
+                "Pwd:              s.Password,",
+                "Folder:           s.Folder}",
+                "if err != nil {",
+                "log.Error(err.Error())",
+                "} else {",
+                "}"
+              ]
+            },
+            {
+              "Primary Functional Area": "Data Management and Integrity",
+              "Sub Functional Area": "Data Processing",
+              "Example issues to look for": [
+                "Data Element Aggregating an Excessively Large Number of Non-Primitive Elements",
+                "Excessive Data Query Operations in a Large Data Table",
+                "Missing Serialization Control Element",
+                "Excessive Execution of Sequential Searches of Data Resource",
+                "Data Resource Access without Use of Connection Pooling",
+                "Non-SQL Invokable Control Element with Excessive Number of Data Resource Accesses",
+                "Excessive Index Range Scan for a Data Resource",
+                "Reliance on Machine-Dependent Data Representation",
+                "Missing XML Validation",
+                "Improper Handling of Length Parameter Inconsistency",
+                "Collapse of Data into Unsafe Value",
+                "Improper Handling of Structural Elements",
+                "Acceptance of Extraneous Untrusted Data With Trusted Data",
+                "Improper Handling of Highly Compressed Data (Data Amplification)",
+                "Deserialization of Untrusted Data",
+                "Dangling Database Cursor ('Cursor Injection')"
+              ],
+              "Code lines": [
+                "imapClient, err := mbox.newClient()",
+                "if err != nil {",
+                "return err",
+                "}",
+                "seqSet := new(imap.SeqSet)",
+                "seqSet.AddNum(seqs...)",
+                "item := imap.FormatFlagsOp(imap.RemoveFlags, true)",
+                "err = imapClient.Store(seqSet, item, imap.SeenFlag, nil)",
+                "if err != nil {",
+                "return err",
+                "}",
+                "}",
+                "imapClient, err := mbox.newClient()",
+                "if err != nil {",
+                "return err",
+                "}",
+                "seqSet := new(imap.SeqSet)",
+                "seqSet.AddNum(seqs...)",
+                "item := imap.FormatFlagsOp(imap.AddFlags, true)",
+                "err = imapClient.Store(seqSet, item, imap.DeletedFlag, nil)",
+                "if err != nil {",
+                "return err",
+                "}",
+                "}",
+                "func (mbox *Mailbox) GetUnread(markAsRead, delete bool) ([]Email, error) {",
+                "imap.CharsetReader = charset.Reader",
+                "var emails []Email",
+                "if err != nil {",
+                "return emails, fmt.Errorf(\"failed to create IMAP connection: %s\", err)",
+                "}",
+                "// Search for unread emails",
+                "criteria.WithoutFlags = []string{imap.SeenFlag}",
+                "seqs, err := imapClient.Search(criteria)",
+                "if err != nil {",
+                "return emails, err",
+                "if len(seqs) == 0 {",
+                "return emails, nil",
+                "}",
+                "seqset.AddNum(seqs...)",
+                "section := &imap.BodySectionName{}",
+                "items := []imap.FetchItem{imap.FetchEnvelope, imap.FetchFlags, imap.FetchInternalDate, section.FetchItem()}",
+                "messages := make(chan *imap.Message)",
+                "go func() {",
+                "if err := imapClient.Fetch(seqset, items, messages); err != nil {",
+                "log.Error(\"Error fetching emails: \", err.Error()) // TODO: How to handle this, need to propogate error out",
+                "}",
+                "// Extract raw message body. I can't find a better way to do this with the emersion library",
+                "var buf []byte",
+                "for _, value := range msg.Body {",
+                "buf = make([]byte, value.Len())",
+                "value.Read(buf)",
+                "}",
+                "re := regexp.MustCompile(`\\r`)",
+                "tmp = re.ReplaceAllString(tmp, \"\")",
+                "buf = []byte(tmp)",
+                "rawBodyStream := bytes.NewReader(buf)",
+                "if err != nil {",
+                "return emails, err",
+                "}"
+              ]
+            }
+          ]
+        },
+        "scan_response": {
+          "vuln_score": 6,
+          "exploitable_vuln": true,
+          "description": "The code contains several vulnerabilities related to error handling and insecure configurations. Specifically, the use of 'log.Fatal(err)' in multiple places indicates that the application will terminate on encountering an error, which can lead to denial of service if critical components fail. Additionally, the configuration of 'InsecureSkipVerify' in the TLS settings can expose the application to man-in-the-middle attacks by allowing connections to untrusted certificates. The presence of these issues suggests a moderate risk of exploitation, particularly in a production environment where security is paramount."
+        }
+      },
+      {
+        "code_block": {
+          "categorized_lines": [
+            {
+              "Primary Functional Area": "API and Functionality Management",
+              "Sub Functional Area": "Initialization and Cleanup",
+              "Example issues to look for": [
+                "Initialization of a Resource with an Insecure Default",
+                "Non-exit on Failed Initialization"
+              ],
+              "Code lines": [
+                "*gomail.Dialer",
+                "}",
+                "import (",
+                "import (",
+                "senderInstance.client.Transport = tr",
+                "}"
+              ]
+            },
+            {
+              "Primary Functional Area": "API and Functionality Management",
+              "Sub Functional Area": "Data / Function Handling",
+              "Example issues to look for": [
+                "Invokable Control Element with Excessive File or Data Access Operations",
+                "Reliance on Runtime Component in Generated Code",
+                "Use of Inherently Dangerous Function",
+                "Symbolic Name not Mapping to Correct Object",
+                "Use of NullPointerException Catch to Detect NULL Pointer Dereference",
+                "Deployment of Wrong Handler",
+                "Missing Handler",
+                "Use of Function with Inconsistent Implementations",
+                "Undefined Behavior for Input to API",
+                "Use of Obsolete Function",
+                "Exposed Dangerous Method or Function",
+                "Improper Control of Generation of Code ('Code Injection')"
+              ],
+              "Code lines": [
+                "return d.Dialer.Dial()",
+                "}",
+                "func (s *SMTP) GetDialer() (mailer.Dialer, error) {",
+                "}",
+                "Send(endPoint EndPoint, data interface{}) error",
+                "}",
+                "func Send(endPoint EndPoint, data interface{}) error {",
+                "}",
+                "func SendAll(endPoints []EndPoint, data interface{}) {",
+                "}",
+                "jsonData, err := json.Marshal(data)",
+                "}"
+              ]
+            },
+            {
+              "Primary Functional Area": "Data Management and Integrity",
+              "Sub Functional Area": "Data Processing",
+              "Example issues to look for": [
+                "Data Element Aggregating an Excessively Large Number of Non-Primitive Elements",
+                "Excessive Data Query Operations in a Large Data Table",
+                "Missing Serialization Control Element",
+                "Excessive Execution of Sequential Searches of Data Resource",
+                "Data Resource Access without Use of Connection Pooling",
+                "Non-SQL Invokable Control Element with Excessive Number of Data Resource Accesses",
+                "Excessive Index Range Scan for a Data Resource",
+                "Reliance on Machine-Dependent Data Representation",
+                "Missing XML Validation",
+                "Improper Handling of Length Parameter Inconsistency",
+                "Collapse of Data into Unsafe Value",
+                "Improper Handling of Structural Elements",
+                "Acceptance of Extraneous Untrusted Data With Trusted Data",
+                "Improper Handling of Highly Compressed Data (Data Amplification)",
+                "Deserialization of Untrusted Data",
+                "Dangling Database Cursor ('Cursor Injection')"
+              ],
+              "Code lines": [
+                "Id               int64     `json:\"id\" gorm:\"column:id; primary_key:yes\"`",
+                "}",
+                "Id     int64  `json:\"-\"`",
+                "}",
+                "return \"smtp\"",
+                "// Validate ensures that SMTP configs/connections are valid",
+                "ss := []SMTP{}",
+                "// GetSMTP returns the SMTP, if it exists, specified by the given id and user_id.",
+                "func GetSMTP(id int64, uid int64) (SMTP, error) {",
+                "}",
+                "s := SMTP{}",
+                "// PostSMTP creates a new SMTP in the database.",
+                "err := s.Validate()",
+                "}",
+                "// Per the PUT Method RFC, it presumes all data for a SMTP is provided.",
+                "// DeleteSMTP deletes an existing SMTP in the database.",
+                "// An error is returned if a SMTP with the given user id and SMTP id is not found.",
+                "Filename: webhook.go"
+              ]
+            },
+            {
+              "Primary Functional Area": "Data Management and Integrity",
+              "Sub Functional Area": "Data Validation",
+              "Example issues to look for": [
+                "Misinterpretation of Input",
+                "Improper Use of Validation Framework",
+                "Improper Validation of Unsafe Equivalence in Input",
+                "Incorrect Parsing of Numbers with Different Radices",
+                "Improper Handling of Missing Special Element",
+                "Improper Handling of Additional Special Element",
+                "Improper Handling of Inconsistent Special Elements",
+                "Improper Handling of Case Sensitivity",
+                "Incorrect Behavior Order: Early Validation",
+                "Improper Handling of Values",
+                "Improper Handling of Parameters",
+                "Unchecked Input for Loop Condition"
+              ],
+              "Code lines": [
+                "// ErrHostNotSpecified is thrown when there is no Host specified",
+                "// TableName specifies the database tablename for Gorm to use",
+                "switch {",
+                "}"
+              ]
+            },
+            {
+              "Primary Functional Area": "Cryptography and Key Management",
+              "Sub Functional Area": "Cryptographic Handling",
+              "Example issues to look for": [
+                "Generation of Weak Initialization Vector (IV)",
+                "Use of a Cryptographic Primitive with a Risky Implementation",
+                "Key Exchange without Entity Authentication",
+                "Reusing a Nonce, Key Pair in Encryption",
+                "Missing Cryptographic Step",
+                "Use of Weak Hash",
+                "Insufficient Entropy",
+                "Improper Verification of Cryptographic Signature",
+                "Missing Support for Integrity Check",
+                "Improper Validation of Integrity Check Value",
+                "Download of Code Without Integrity Check",
+                "Covert Storage Channel"
+              ],
+              "Code lines": [
+                "hash1 := hmac.New(sha256.New, []byte(secret))",
+                "}"
+              ]
+            }
+          ]
+        },
+        "scan_response": {
+          "vuln_score": 6,
+          "exploitable_vuln": true,
+          "description": "The code exhibits several potential vulnerabilities:\n\n1. **Improper Control of Generation of Code ('Code Injection')**: The function `Send(endPoint EndPoint, data interface{}) error` and its related functions do not show any validation or sanitization of the `data` parameter. If this data comes from an untrusted source, it could lead to code injection vulnerabilities.\n\n2. **Deserialization of Untrusted Data**: The use of `json.Marshal(data)` without any validation or checks could lead to deserialization issues if the `data` contains malicious content.\n\n3. **Improper Handling of Length Parameter Inconsistency**: The code does not show any checks for the length or structure of the data being processed, which could lead to buffer overflows or other issues if the data is larger than expected.\n\n4. **Missing XML Validation**: Although XML validation is mentioned in the example issues, there is no evidence of any XML handling in the provided code, which could lead to vulnerabilities if XML data is processed without validation.\n\nThese issues are concerning as they can lead to significant security risks, including remote code execution and data breaches. To mitigate these risks, it is recommended to implement input validation, sanitize all inputs, and ensure proper error handling and logging."
+        }
+      }
+    ]
+  },
+  {
+    "id": "CVE-2022-28948",
+    "scan_type": "after",
+    "scan_responses": [
+      {
+        "code_block": {
+          "categorized_lines": [
+            {
+              "Primary Functional Area": "API and Functionality Management",
+              "Sub Functional Area": "Expression Issues",
+              "Example issues to look for": [
+                "Processor Optimization Removal or Modification of Security-critical Code",
+                "Excessive Use of Self-Modifying Code",
+                "Missing Default Case in Multiple Condition Expression",
+                "Use of Incorrect Operator",
+                "Incorrect Block Delimitation",
+                "Omitted Break Statement in Switch",
+                "Reachable Assertion",
+                "Executable Regular Expression Error",
+                "Permissive Regular Expression",
+                "Compiler Optimization Removal or Modification of Security-critical Code",
+                "Operator Precedence Logic Error",
+                "Loop with Unreachable Exit Condition ('Infinite Loop')"
+              ],
+              "Code lines": [
+                "return p.event.typ",
+                "}"
+              ]
+            },
+            {
+              "Primary Functional Area": "API and Functionality Management",
+              "Sub Functional Area": "Data / Function Handling",
+              "Example issues to look for": [
+                "Invokable Control Element with Excessive File or Data Access Operations",
+                "Reliance on Runtime Component in Generated Code",
+                "Use of Inherently Dangerous Function",
+                "Symbolic Name not Mapping to Correct Object",
+                "Use of NullPointerException Catch to Detect NULL Pointer Dereference",
+                "Deployment of Wrong Handler",
+                "Missing Handler",
+                "Use of Function with Inconsistent Implementations",
+                "Undefined Behavior for Input to API",
+                "Use of Obsolete Function",
+                "Exposed Dangerous Method or Function",
+                "Improper Control of Generation of Code ('Code Injection')"
+              ],
+              "Code lines": [
+                "p.fail()",
+                "}",
+                "return p.event.typ"
+              ]
+            }
+          ]
+        },
+        "scan_response": {
+          "vuln_score": 6,
+          "exploitable_vuln": false,
+          "description": "The provided code contains potential issues related to expression handling and data/function management. Specifically, the use of 'return p.event.typ' and 'p.fail()' without proper context raises concerns about control flow and error handling. However, there are no explicit vulnerabilities that can be exploited based on the given code. The lack of error handling and potential misuse of return values could lead to undefined behavior, but these do not constitute direct vulnerabilities. To mitigate risks, it is recommended to implement proper error handling and ensure that all return values are validated before use."
+        }
+      }
+    ]
+  }
+]

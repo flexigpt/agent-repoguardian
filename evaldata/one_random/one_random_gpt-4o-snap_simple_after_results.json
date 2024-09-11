@@ -1,0 +1,16 @@
+[
+  {
+    "id": "CVE-2024-25124",
+    "scan_type": "after",
+    "scan_responses": [
+      {
+        "filename": "middleware/cors/cors.go",
+        "programming_language": "Go",
+        "llm_resp": {
+          "vuln": true,
+          "description": "The code contains a potential security vulnerability related to Cross-Origin Resource Sharing (CORS) configuration. Specifically, the vulnerability arises when 'AllowCredentials' is set to true while 'AllowOrigins' is set to a wildcard ('*'). This configuration is insecure because it allows any origin to make requests with credentials, which can lead to unauthorized access to sensitive resources. The code does attempt to mitigate this by panicking if such a configuration is detected, but the presence of this logic indicates a potential risk if the check is bypassed or misconfigured. Additionally, the code logs a warning if both 'AllowOrigins' and 'AllowOriginsFunc' are defined, which could lead to unexpected behavior if not handled correctly. Overall, the main concern is ensuring that 'AllowCredentials' is not true when 'AllowOrigins' is set to '*', as this would violate the security model intended by CORS."
+        }
+      }
+    ]
+  }
+]

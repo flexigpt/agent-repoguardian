@@ -1,0 +1,24 @@
+[
+  {
+    "id": "CVE-2024-25124",
+    "scan_type": "before",
+    "scan_responses": [
+      {
+        "filename": "middleware/cors/cors.go",
+        "programming_language": "Go",
+        "llm_resp": {
+          "vuln": true,
+          "description": "The provided code has a potential vulnerability related to Cross-Origin Resource Sharing (CORS). Specifically, the use of a wildcard '*' in the 'AllowOrigins' setting can expose the application to security risks by allowing any origin to access the resources. This can lead to unauthorized access and data leakage. Additionally, the logic for checking allowed origins does not adequately handle cases where the origin is not explicitly allowed, which could lead to unintended access if not properly validated. Furthermore, the use of 'AllowOriginsFunc' without strict validation could allow malicious origins if not implemented carefully."
+        }
+      },
+      {
+        "filename": "middleware/cors/utils.go",
+        "programming_language": "Go",
+        "llm_resp": {
+          "vuln": true,
+          "description": "The provided code contains a potential vulnerability related to the handling of domain names in the `matchSubdomain` function. Specifically, the function does not adequately validate the format of the input domain and pattern strings. This could lead to issues such as improper handling of malicious input, which may allow for subdomain takeover or bypassing of security checks. Additionally, the use of string manipulation without proper validation could expose the application to injection attacks or unexpected behavior if the input does not conform to expected formats."
+        }
+      }
+    ]
+  }
+]

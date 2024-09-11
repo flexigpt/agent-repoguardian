@@ -1,0 +1,12 @@
+[
+  {
+    "id": "CVE-2024-25124",
+    "scan_type": "before",
+    "scan_responses": [
+      {
+        "vuln": true,
+        "description": "The provided code contains potential vulnerabilities related to Cross-Origin Resource Sharing (CORS) configuration. Specifically: 1. **Wildcard Origin Handling**: The use of '*' in `AllowOrigins` allows any origin to access the resource, which can lead to security risks, especially if sensitive data is exposed. 2. **Dynamic Origin Validation**: The `AllowOriginsFunc` allows for dynamic origin validation, but if not implemented securely, it could allow unauthorized origins. The function should ensure that only trusted origins are allowed. 3. **Subdomain Matching Logic**: The `matchSubdomain` function may allow unintended subdomains if the pattern is not strictly defined. This could lead to security issues if a wildcard subdomain is used without proper validation. 4. **Lack of Rate Limiting or Logging**: There is no indication of rate limiting or logging for CORS requests, which could help in identifying and mitigating abuse or attacks."
+      }
+    ]
+  }
+]
